@@ -1,0 +1,221 @@
+import { StyleSheet } from "react-native";
+import { COLORS } from "../../constants/color";
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.background,
+  },
+  content: {
+    padding: 20,
+    paddingBottom: 0,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 30,
+    paddingHorizontal: 0,
+    paddingVertical: 12,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: COLORS.text,
+  },
+  backButton: {
+    padding: 10,
+    borderRadius: 20,
+    backgroundColor: COLORS.card,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  profileSection: {
+    backgroundColor: COLORS.card,
+    borderRadius: 20,
+    padding: 20,
+    marginBottom: 20,
+    shadowColor: COLORS.shadow,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  profileHeader: {
+    alignItems: "center",
+    marginBottom: 25,
+  },
+  profileImageContainer: {
+    position: "relative",
+    marginBottom: 15,
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: COLORS.border,
+  },
+  editImageButton: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    backgroundColor: COLORS.primary,
+    borderRadius: 20,
+    width: 40,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  profileName: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: COLORS.text,
+    textAlign: "center",
+    marginBottom: 5,
+  },
+  profileEmail: {
+    fontSize: 16,
+    color: COLORS.textLight,
+    textAlign: "center",
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: COLORS.text,
+    marginBottom: 15,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  sectionIcon: {
+    flexDirection: "row",
+    gap: 8,
+  },
+  inputContainer: {
+    marginBottom: 15,
+  },
+  inputLabel: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: COLORS.text,
+    marginBottom: 8,
+  },
+  input: {
+    backgroundColor: COLORS.white,
+    borderRadius: 12,
+    padding: 15,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    fontSize: 16,
+    color: COLORS.text,
+  },
+  inputFocused: {
+    borderColor: COLORS.primary,
+  },
+  inputError: {
+    borderColor: COLORS.expense,
+  },
+  errorText: {
+    color: COLORS.expense,
+    fontSize: 12,
+    marginTop: 4,
+  },
+  row: {
+    flexDirection: "row",
+    gap: 15,
+  },
+  flex1: {
+    flex: 1,
+  },
+  saveButton: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 12,
+    padding: 16,
+    alignItems: "center",
+    marginTop: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  saveButtonText: {
+    color: COLORS.white,
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  saveButtonDisabled: {
+    backgroundColor: COLORS.border,
+  },
+  paymentCard: {
+    backgroundColor: COLORS.white,
+    borderRadius: 12,
+    padding: 15,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+  },
+  paymentCardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  paymentCardTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: COLORS.text,
+  },
+  deleteButton: {
+    padding: 5,
+  },
+  paymentCardContent: {
+    gap: 8,
+  },
+  paymentInfo: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  paymentLabel: {
+    fontSize: 14,
+    color: COLORS.textLight,
+  },
+  paymentValue: {
+    fontSize: 14,
+    color: COLORS.text,
+    fontWeight: "500",
+  },
+  addPaymentButton: {
+    backgroundColor: COLORS.white,
+    borderRadius: 12,
+    padding: 15,
+    borderWidth: 2,
+    borderColor: COLORS.primary,
+    borderStyle: "dashed",
+    alignItems: "center",
+    marginTop: 10,
+  },
+  addPaymentButtonText: {
+    color: COLORS.primary,
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  loadingContainer: {
+    padding: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  scrollContent: {
+    paddingBottom: 30,
+  },
+}); 
