@@ -178,15 +178,7 @@ const NotificationScreen = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView 
-        style={styles.content}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        {/* Header */}
+      {/* Header */}
         <View style={styles.header}>
           <View>
             <Text style={styles.headerTitle}>Notifications</Text>
@@ -209,7 +201,14 @@ const NotificationScreen = () => {
             </TouchableOpacity>
           )}
         </View>
-
+      <ScrollView 
+        style={styles.content}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         {/* Notifications List */}
         {notifications.length > 0 ? (
           notifications.map((notification) => (

@@ -7,16 +7,22 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
   },
   content: {
-    padding: 20,
+    paddingHorizontal: 20,
     paddingBottom: 0,
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 30,
-    paddingHorizontal: 0,
-    paddingVertical: 12,
+    paddingTop: 30,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+  },
+  headerRight: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    marginStart: 16,
   },
   headerTitle: {
     fontSize: 28,

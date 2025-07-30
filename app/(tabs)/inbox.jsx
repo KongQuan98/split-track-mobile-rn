@@ -191,15 +191,7 @@ const InboxScreen = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView 
-        style={styles.content}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        {/* Header */}
+      {/* Header */}
         <View style={styles.header}>
           <View>
             <Text style={styles.headerTitle}>Inbox</Text>
@@ -220,7 +212,14 @@ const InboxScreen = () => {
             <Ionicons name="add" size={20} color={COLORS.text} />
           </TouchableOpacity>
         </View>
-
+      <ScrollView 
+        style={styles.content}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         {/* Search */}
         <View style={styles.searchContainer}>
           <TextInput

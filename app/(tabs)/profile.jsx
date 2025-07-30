@@ -20,6 +20,7 @@ import { PaymentModal } from '../../components/PaymentModal';
 import { COLORS } from '../../constants/color';
 import { useProfile } from '../../hooks/useProfile';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { SignOutButton } from '@/components/SignOutButton';
 
 const ProfileScreen = () => {
   const { user } = useUser();
@@ -158,196 +159,202 @@ const ProfileScreen = () => {
   }
 
   return (
-    <KeyboardAwareScrollView
-      style={{ flex: 1 }}
-      contentContainerStyle={{ flexGrow: 1 }}
-      enableOnAndroid={true}
-      enableAutomaticScroll={true}
-      extraScrollHeight={30}
-    >
-      <View style={styles.container}>
-        <KeyboardAvoidingView 
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={{ flex: 1 }}
-        >
-          <ScrollView 
-            style={styles.content}
-            contentContainerStyle={styles.scrollContent}
-            showsVerticalScrollIndicator={false}
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Profile</Text>
+        <View style={styles.headerRight}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => setIsEditing(!isEditing)}
           >
-            {/* Header */}
-            <View style={styles.header}>
-              <Text style={styles.headerTitle}>Profile</Text>
-              <TouchableOpacity
-                style={styles.backButton}
-                onPress={() => setIsEditing(!isEditing)}
-              >
-                <Ionicons 
-                  name={isEditing ? "checkmark" : "create-outline"} 
-                  size={24} 
-                  color={isEditing ? COLORS.primary : COLORS.text} 
-                />
-              </TouchableOpacity>
-            </View>
-
-            {/* Profile Section */}
-            <View style={styles.profileSection}>
-              <View style={styles.profileHeader}>
-                <View style={styles.profileImageContainer}>
-                  {renderProfileImage()}
-                  <TouchableOpacity 
-                    style={[styles.editImageButton, { display: isEditing ? 'flex' : 'none'}]}
-                    onPress={pickImage}
-                  >
-                    <Ionicons name="camera" size={20} color={COLORS.white} />
-                  </TouchableOpacity>
-                </View>
-                <Text style={styles.profileName}>
-                  {localProfileData.firstName} {localProfileData.lastName}
-                </Text>
-                <Text style={styles.profileEmail}>
-                  {user?.emailAddresses[0]?.emailAddress}
-                </Text>
-              </View>
-
-              {/* Personal Information */}
-              <View>
-                <View style={styles.sectionIcon}>
-                  <Ionicons name="person-outline" size={20} color={COLORS.primary} />
-                  <Text style={styles.sectionTitle}>
-                    Personal Information
+            <Ionicons 
+              name={isEditing ? "checkmark" : "create-outline"} 
+              size={24} 
+              color={isEditing ? COLORS.primary : COLORS.text} 
+            />
+          </TouchableOpacity>
+          <SignOutButton />
+        </View>
+        
+      </View>
+      
+      <KeyboardAwareScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1 }}
+        enableOnAndroid={true}
+        enableAutomaticScroll={true}
+        extraScrollHeight={30}
+      >
+        <View style={styles.container}>
+          <KeyboardAvoidingView 
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={{ flex: 1 }}
+          >
+            <ScrollView 
+              style={styles.content}
+              contentContainerStyle={styles.scrollContent}
+              showsVerticalScrollIndicator={false}
+            >
+              {/* Profile Section */}
+              <View style={styles.profileSection}>
+                <View style={styles.profileHeader}>
+                  <View style={styles.profileImageContainer}>
+                    {renderProfileImage()}
+                    <TouchableOpacity 
+                      style={[styles.editImageButton, { display: isEditing ? 'flex' : 'none'}]}
+                      onPress={pickImage}
+                    >
+                      <Ionicons name="camera" size={20} color={COLORS.white} />
+                    </TouchableOpacity>
+                  </View>
+                  <Text style={styles.profileName}>
+                    {localProfileData.firstName} {localProfileData.lastName}
+                  </Text>
+                  <Text style={styles.profileEmail}>
+                    {user?.emailAddresses[0]?.emailAddress}
                   </Text>
                 </View>
-              
-                <View style={styles.row}>
-                  <View style={[styles.inputContainer, styles.flex1]}>
-                    <Text style={styles.inputLabel}>First Name</Text>
+
+                {/* Personal Information */}
+                <View>
+                  <View style={styles.sectionIcon}>
+                    <Ionicons name="person-outline" size={20} color={COLORS.primary} />
+                    <Text style={styles.sectionTitle}>
+                      Personal Information
+                    </Text>
+                  </View>
+                
+                  <View style={styles.row}>
+                    <View style={[styles.inputContainer, styles.flex1]}>
+                      <Text style={styles.inputLabel}>First Name</Text>
+                      <TextInput
+                        style={[
+                          styles.input,
+                          focusedInput === 'firstName' && styles.inputFocused,
+                          !isEditing && { backgroundColor: COLORS.background }
+                        ]}
+                        value={localProfileData.firstName}
+                        onChangeText={(text) => setLocalProfileData(prev => ({ ...prev, firstName: text }))}
+                        placeholder="Enter first name"
+                        placeholderTextColor={COLORS.textLight}
+                        editable={isEditing}
+                        onFocus={() => setFocusedInput('firstName')}
+                        onBlur={() => setFocusedInput(null)}
+                      />
+                    </View>
+                    <View style={[styles.inputContainer, styles.flex1]}>
+                      <Text style={styles.inputLabel}>Last Name</Text>
+                      <TextInput
+                        style={[
+                          styles.input,
+                          focusedInput === 'lastName' && styles.inputFocused,
+                          !isEditing && { backgroundColor: COLORS.background }
+                        ]}
+                        value={localProfileData.lastName}
+                        onChangeText={(text) => setLocalProfileData(prev => ({ ...prev, lastName: text }))}
+                        placeholder="Enter last name"
+                        placeholderTextColor={COLORS.textLight}
+                        editable={isEditing}
+                        onFocus={() => setFocusedInput('lastName')}
+                        onBlur={() => setFocusedInput(null)}
+                      />
+                    </View>
+                  </View>
+
+                  <View style={styles.inputContainer}>
+                    <Text style={styles.inputLabel}>Nickname</Text>
                     <TextInput
                       style={[
                         styles.input,
-                        focusedInput === 'firstName' && styles.inputFocused,
+                        focusedInput === 'nickname' && styles.inputFocused,
                         !isEditing && { backgroundColor: COLORS.background }
                       ]}
-                      value={localProfileData.firstName}
-                      onChangeText={(text) => setLocalProfileData(prev => ({ ...prev, firstName: text }))}
-                      placeholder="Enter first name"
+                      value={localProfileData.nickname}
+                      onChangeText={(text) => setLocalProfileData(prev => ({ ...prev, nickname: text }))}
+                      placeholder="Enter nickname (optional)"
                       placeholderTextColor={COLORS.textLight}
                       editable={isEditing}
-                      onFocus={() => setFocusedInput('firstName')}
+                      onFocus={() => setFocusedInput('nickname')}
                       onBlur={() => setFocusedInput(null)}
                     />
                   </View>
-                  <View style={[styles.inputContainer, styles.flex1]}>
-                    <Text style={styles.inputLabel}>Last Name</Text>
+
+                  <View style={styles.inputContainer}>
+                    <Text style={styles.inputLabel}>Phone Number</Text>
                     <TextInput
                       style={[
                         styles.input,
-                        focusedInput === 'lastName' && styles.inputFocused,
+                        focusedInput === 'phoneNumber' && styles.inputFocused,
                         !isEditing && { backgroundColor: COLORS.background }
                       ]}
-                      value={localProfileData.lastName}
-                      onChangeText={(text) => setLocalProfileData(prev => ({ ...prev, lastName: text }))}
-                      placeholder="Enter last name"
+                      value={localProfileData.phoneNumber}
+                      onChangeText={(text) => setLocalProfileData(prev => ({ ...prev, phoneNumber: text }))}
+                      placeholder="Enter phone number"
                       placeholderTextColor={COLORS.textLight}
+                      keyboardType="phone-pad"
                       editable={isEditing}
-                      onFocus={() => setFocusedInput('lastName')}
+                      onFocus={() => setFocusedInput('phoneNumber')}
                       onBlur={() => setFocusedInput(null)}
                     />
                   </View>
-                </View>
 
-                <View style={styles.inputContainer}>
-                  <Text style={styles.inputLabel}>Nickname</Text>
-                  <TextInput
-                    style={[
-                      styles.input,
-                      focusedInput === 'nickname' && styles.inputFocused,
-                      !isEditing && { backgroundColor: COLORS.background }
-                    ]}
-                    value={localProfileData.nickname}
-                    onChangeText={(text) => setLocalProfileData(prev => ({ ...prev, nickname: text }))}
-                    placeholder="Enter nickname (optional)"
-                    placeholderTextColor={COLORS.textLight}
-                    editable={isEditing}
-                    onFocus={() => setFocusedInput('nickname')}
-                    onBlur={() => setFocusedInput(null)}
-                  />
+                  {isEditing && (
+                    <TouchableOpacity
+                      style={[styles.saveButton, isLoading && styles.saveButtonDisabled]}
+                      onPress={handleSaveProfile}
+                      disabled={isLoading}
+                    >
+                      {isLoading ? (
+                        <ActivityIndicator color={COLORS.white} />
+                      ) : (
+                        <Text style={styles.saveButtonText}>Save Changes</Text>
+                      )}
+                    </TouchableOpacity>
+                  )}
                 </View>
-
-                <View style={styles.inputContainer}>
-                  <Text style={styles.inputLabel}>Phone Number</Text>
-                  <TextInput
-                    style={[
-                      styles.input,
-                      focusedInput === 'phoneNumber' && styles.inputFocused,
-                      !isEditing && { backgroundColor: COLORS.background }
-                    ]}
-                    value={localProfileData.phoneNumber}
-                    onChangeText={(text) => setLocalProfileData(prev => ({ ...prev, phoneNumber: text }))}
-                    placeholder="Enter phone number"
-                    placeholderTextColor={COLORS.textLight}
-                    keyboardType="phone-pad"
-                    editable={isEditing}
-                    onFocus={() => setFocusedInput('phoneNumber')}
-                    onBlur={() => setFocusedInput(null)}
-                  />
-                </View>
-
-                {isEditing && (
-                  <TouchableOpacity
-                    style={[styles.saveButton, isLoading && styles.saveButtonDisabled]}
-                    onPress={handleSaveProfile}
-                    disabled={isLoading}
-                  >
-                    {isLoading ? (
-                      <ActivityIndicator color={COLORS.white} />
-                    ) : (
-                      <Text style={styles.saveButtonText}>Save Changes</Text>
-                    )}
-                  </TouchableOpacity>
-                )}
               </View>
-            </View>
 
-            {/* Payment Methods Section */}
-            <View style={styles.profileSection}>
-              <View style={styles.sectionIcon}>
-                <Ionicons name="card-outline" size={20} color={COLORS.primary} />
-                <Text style={styles.sectionTitle}>
-                  Payment Methods
-                </Text>
+              {/* Payment Methods Section */}
+              <View style={styles.profileSection}>
+                <View style={styles.sectionIcon}>
+                  <Ionicons name="card-outline" size={20} color={COLORS.primary} />
+                  <Text style={styles.sectionTitle}>
+                    Payment Methods
+                  </Text>
+                </View>
+                
+
+                {paymentMethods.map((payment) => (
+                  <PaymentCard
+                    key={payment.id}
+                    payment={payment}
+                    onEdit={handleEditPayment}
+                    onDelete={handleDeletePayment}
+                  />
+                ))}
+
+                <TouchableOpacity
+                  style={styles.addPaymentButton}
+                  onPress={handleAddPayment}
+                >
+                  <Ionicons name="add" size={20} color={COLORS.primary} />
+                  <Text style={styles.addPaymentButtonText}>Add Payment Method</Text>
+                </TouchableOpacity>
               </View>
-              
+            </ScrollView>
+          </KeyboardAvoidingView>
 
-              {paymentMethods.map((payment) => (
-                <PaymentCard
-                  key={payment.id}
-                  payment={payment}
-                  onEdit={handleEditPayment}
-                  onDelete={handleDeletePayment}
-                />
-              ))}
-
-              <TouchableOpacity
-                style={styles.addPaymentButton}
-                onPress={handleAddPayment}
-              >
-                <Ionicons name="add" size={20} color={COLORS.primary} />
-                <Text style={styles.addPaymentButtonText}>Add Payment Method</Text>
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
-        </KeyboardAvoidingView>
-
-        {/* Payment Modal */}
-        <PaymentModal
-          visible={paymentModalVisible}
-          onClose={() => setPaymentModalVisible(false)}
-          onSave={handleSavePayment}
-          payment={editingPayment}
-        />
-      </View>
-    </KeyboardAwareScrollView>
+          {/* Payment Modal */}
+          <PaymentModal
+            visible={paymentModalVisible}
+            onClose={() => setPaymentModalVisible(false)}
+            onSave={handleSavePayment}
+            payment={editingPayment}
+          />
+        </View>
+      </KeyboardAwareScrollView>
+    </View>
   );
 };
 

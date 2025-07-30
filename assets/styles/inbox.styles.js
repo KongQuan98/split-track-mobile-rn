@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
   },
   content: {
-    padding: 20,
+    paddingHorizontal: 20,
     paddingBottom: 0,
   },
   header: {
@@ -15,8 +15,8 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 30,
-    paddingHorizontal: 0,
-    paddingVertical: 12,
+    paddingHorizontal: 20,
+    paddingTop: 30,
   },
   headerTitle: {
     fontSize: 28,
